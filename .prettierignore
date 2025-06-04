@@ -1,0 +1,10 @@
+# .prettierignore
+.dockerignore
+yarn.lock
+.env
+.prettierignore
+.gitignore
+*.png
+*.ico
+*.txt
+logo.svg

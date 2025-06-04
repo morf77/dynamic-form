@@ -1,0 +1,27 @@
+.basic-group input:not(:placeholder-shown) + .label {
+  @apply absolute -top-[20%] scale-75 start-0;
+}
+
+.basic-group input:not(:placeholder-shown) + .label::before {
+  content: '.';
+  @apply text-[3rem] leading-[0];
+}
+
+.basic-group input:not(:placeholder-shown) + .label::after {
+  content: '.';
+  @apply text-[3rem] leading-[0];
+}
+
+.basic-group input:focus + .label {
+  @apply absolute -top-[20%] scale-75 start-0;
+}
+
+.basic-group input:focus + .label::before {
+  content: '.';
+  @apply text-[3rem] leading-[0];
+}
+
+.basic-group input:focus + .label::after {
+  content: '.';
+  @apply text-[3rem] leading-[0];
+}

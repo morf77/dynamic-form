@@ -1,0 +1,21 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 110,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "files.encoding": "utf8",
+  "[md]": {
+    "editor.trimAutoWhitespace": false
+  },
+  "cSpell.words": ["chartjs", "IBAN", "jsons", "registerables", "SHAHAB", "Toman", "tradingview"],
+  "prettier.requireConfig": true,
+  "svg.preview.background": "custom",
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]"],
+    ["clsx\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]"]
+  ]
+}
