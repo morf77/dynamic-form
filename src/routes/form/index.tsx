@@ -11,10 +11,13 @@ import { FIELDS_TYPE } from '../../enums/services';
 import SkeletonFetchingLoading from '../../components/ui/loaders/skeleton';
 import Button from '../../components/ui/button';
 import { objectCleaner } from '../../helpers/object';
+import useAppTranslation from '../../lib/i18n';
 
 type NestedArray = Array<string | NestedArray>;
 
 const PageForm: FC = () => {
+  const translate = useAppTranslation('translate');
+
   const navigate = useNavigate();
 
   const {
@@ -89,7 +92,6 @@ const PageForm: FC = () => {
       <FormProvider {...methods}>
         <form
           onSubmit={methods.handleSubmit(async form => {
-            console.log('Form data:', form);
             const currentTab =
               tabs.find(tab => window.location.href.includes(tab.query)) || tabs[0];
 
@@ -105,14 +107,10 @@ const PageForm: FC = () => {
 
             const allowedKeys = selectedData?.fields.map(keyExtractor).flat() as Array<string>;
 
-            console.log(currentTab, selectedData, allowedKeys);
-
             // Filter data: only send allowed keys
             const filteredData = Object.fromEntries(
               Object.entries(form).filter(([key]) => allowedKeys.includes(key))
             );
-
-            console.log('Filtered Form data:', filteredData);
 
             await post(objectCleaner({ object: filteredData }));
 
