@@ -10,6 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import { FIELDS_TYPE } from '../../enums/services';
 import SkeletonFetchingLoading from '../../components/ui/loaders/skeleton';
 import Button from '../../components/ui/button';
+import { objectCleaner } from '../../helpers/object';
+
+type NestedArray = Array<string | NestedArray>;
 
 const PageForm: FC = () => {
   const navigate = useNavigate();
@@ -41,10 +44,6 @@ const PageForm: FC = () => {
         }))
       }) as Service.forms
   );
-
-  console.log(isLoadingForms, isUninitialized);
-
-  console.log(skeletons, data, (isLoading || isUninitialized) && !data?.length);
 
   const tabs: Array<Components.ui.tab.tab> = (
     ((isLoadingForms || isUninitialized) && !data ? skeletons : data) || []
@@ -83,18 +82,39 @@ const PageForm: FC = () => {
     query: item.formId
   }));
 
-  console.log('Tabs:', tabs);
-
   return (
     <TabProvider tabs={tabs} defaultTab={tabs[0]?.query}>
       <TabDisplayToggler isLoading={isLoadingForms} />
       {!!error && <p>Error loading forms: {(error as any)?.message}</p>}
       <FormProvider {...methods}>
         <form
-          onSubmit={methods.handleSubmit(async data => {
-            console.log('Form data:', data);
+          onSubmit={methods.handleSubmit(async form => {
+            console.log('Form data:', form);
+            const currentTab =
+              tabs.find(tab => window.location.href.includes(tab.query)) || tabs[0];
 
-            await post(data);
+            const selectedData = data?.find(item => item.formId === currentTab.query);
+
+            const keyExtractor = (field: Service.field): string | NestedArray => {
+              if (field.type === FIELDS_TYPE.GROUP) {
+                return field.fields.map(item => keyExtractor(item)).flat();
+              }
+
+              return field.id;
+            };
+
+            const allowedKeys = selectedData?.fields.map(keyExtractor).flat() as Array<string>;
+
+            console.log(currentTab, selectedData, allowedKeys);
+
+            // Filter data: only send allowed keys
+            const filteredData = Object.fromEntries(
+              Object.entries(form).filter(([key]) => allowedKeys.includes(key))
+            );
+
+            console.log('Filtered Form data:', filteredData);
+
+            await post(objectCleaner({ object: filteredData }));
 
             navigate('/result');
           })}

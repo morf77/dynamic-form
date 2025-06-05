@@ -17,8 +17,6 @@ const Input: FC<Components.ui.input> = ({
   classNameHelperText,
   ...props
 }) => {
-  console.log(size);
-
   const stylesContainer = twMerge(inputBasic.styleContainer({ size, color }), className);
 
   const styles = twMerge(inputBasic.styleInput({ size, color }), classNameInput);

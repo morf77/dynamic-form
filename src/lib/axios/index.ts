@@ -13,6 +13,7 @@ const axiosInstance = axios.create(axiosRequestConfig);
 
 axiosInstance.interceptors.request.use(
   async requestConfig => {
+    console.log('before request axios', requestConfig);
     return requestConfig;
   },
   error => Promise.reject(error)

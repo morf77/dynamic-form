@@ -7,19 +7,29 @@ import { axiosBaseQuery } from '../../lib/axios/axios-base-query';
 export const insuranceSlice = createApi({
   reducerPath: 'insuranceSlice',
   baseQuery: axiosBaseQuery({ baseURL: '/api' }),
+  tagTypes: ['InsuranceForms', 'InsuranceFormResults'],
   endpoints: builder => ({
     getFormResults: builder.query<Service.results, void>({
-      query: () => ({ url: '/insurance/forms/submissions', method: 'GET' })
+      query: () => ({ url: '/insurance/forms/submissions', method: 'GET' }),
+      providesTags: ['InsuranceFormResults']
     }),
     getForms: builder.query<Array<Service.forms>, void>({
       query: () => ({ url: '/insurance/forms', method: 'GET' })
     }),
     postFormResult: builder.mutation<any, any>({
-      query: body => ({
-        url: `/insurance/forms/submit`,
-        method: 'POST',
-        body
-      })
+      query: body => {
+        console.log('before post', body);
+
+        return {
+          url: `/insurance/forms/submit`,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          body
+        };
+      },
+      invalidatesTags: ['InsuranceFormResults']
     })
   })
 });

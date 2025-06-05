@@ -56,16 +56,12 @@ const ControlledRadio: FC<
 
         const isSelected = value === selectedValue;
 
-        console.log(name, value, isSelected);
-
         return (
           <Radio
             {...props}
             name={field.name}
             checked={isSelected}
             onChange={() => {
-              console.log(isSelected);
-
               isSelected ? null : setValue(name, value);
             }}
             value={value}

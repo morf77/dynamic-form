@@ -14,18 +14,7 @@ const ControlledButtonSubmit: FC<Components.ui.button> = ({
       name="button"
       control={control}
       render={({ formState }) => (
-        <Button
-          onClick={() => {
-            console.log('clicked');
-          }}
-          disabled={!formState.isValid || disabled}
-          type={type}
-          {...restProps}
-        >
-          {(() => {
-            console.log('Button render', formState.isValid, disabled);
-            return '';
-          })()}
+        <Button disabled={!formState.isValid || disabled} type={type} {...restProps}>
           {children}
         </Button>
       )}

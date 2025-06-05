@@ -5,8 +5,11 @@ import { axiosInstance } from '.';
 const axiosBaseQuery =
   ({ baseURL }: { baseURL: string }): BaseQueryFn<AxiosRequestConfig> =>
   async (
-    config
-    // { getState, dispatch }
+    config,
+    {
+      // getState
+      // , dispatch
+    }
   ) => {
     try {
       // handle read session in server or client
@@ -23,7 +26,17 @@ const axiosBaseQuery =
       //     Authorization: `Bearer ${state.session?.user.accessToken}`
       //   };
 
-      const result = await axiosInstance({ ...config, url: `${baseURL}${config.url}` });
+      // Map `body` to `data` for Axios compatibility
+      const { body, headers, ...rest } = config as typeof config & {
+        body?: any;
+      };
+
+      const result = await axiosInstance({
+        ...rest,
+        headers: { ...headers },
+        data: body,
+        url: `${baseURL}${config.url}`
+      });
 
       return { data: result.data };
     } catch (axiosError) {

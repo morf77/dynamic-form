@@ -41,7 +41,6 @@ const ControlledSelect: FC<ControlledSelectProps> = props => {
 
   useEffect(() => {
     if (connectedToURL) {
-      console.log('first');
       const params = new URLSearchParams(location.search);
       const urlValue = params.get(name);
       if (urlValue && list.some(item => item.value === urlValue)) {
@@ -52,7 +51,6 @@ const ControlledSelect: FC<ControlledSelectProps> = props => {
 
   useEffect(() => {
     if (connectedToURL) {
-      console.log('second');
       const subscription = watch((values, { name: changedName }) => {
         if (changedName === name) {
           const params = new URLSearchParams(location.search);
@@ -77,8 +75,6 @@ const ControlledSelect: FC<ControlledSelectProps> = props => {
       rules={{ ...registerOptions }}
       defaultValue={defaultValue || ''}
       render={({ field, formState }) => {
-        console.log(field.value);
-
         const error = formState.errors[name];
 
         const firstBlurOrHasError = firstBlur || (!firstBlur && error);
