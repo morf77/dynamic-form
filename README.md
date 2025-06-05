@@ -1,56 +1,101 @@
-# Getting Started with Create React App
+## Message
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Apologies for the delay in delivering the code. In this project, I tried to showcase my mindset and
+understanding of frontend development. The focus is more on isolation processes and inheritance
+rather than just technology, along with a cohesive approach to typography.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Dynamic insurance forms with validation
+- Multi-language support (English & Farsi)
+- Responsive UI with Tailwind CSS
+- Redux Toolkit for state management
+- API integration with RTK Query & Axios
+- Locale-based routing (`/:locale/*`)
+- Dark/light theme toggle
+- Integrated design pattern base on project needs
+- Inheritance from stable UI elements and isolation in the factory and libs sections
+- Namespace base typography
+- Sprites icon system
+- Use form integration with projects
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 1. **Clone the repository**
 
-### `npm test`
+```sh
+git clone <your-repo-url>
+cd insurance
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more
-information.
+### 2. **Install dependencies**
 
-### `npm run build`
+```sh
+npm install
+# or
+yarn install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 3. **Run the development server**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```sh
+npm run dev
+# or
+yarn dev
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for
-more information.
+The app will be available at [http://localhost:3000](http://localhost:3000).
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Project Structure
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time.
-This command will remove the single build dependency from your project.
+```
+src/
+  components/
+    =>/ui          # Reusable UI components
+    =>factory      # extending logics
+    =>types        # declaring global name space for components
+  routes/          # App routes and layouts (next js like app)
+  services/        # API logic (RTK Query, Axios)
+  providers/       # Context and global providers
+  enums/           # Enums and constants
+  helpers/         # Utility functions
+  i18n.ts          # i18n configuration
+public/
+  locales/         # Translation files (en, fa)
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel,
-ESLint, etc) right into your project so you have full control over them. All of the commands except
-`eject` will still work, but they will point to the copied scripts so you can tweak them. At this
-point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle
-deployments, and you shouldn’t feel obligated to use this feature. However we understand that this
-tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Localization
 
-## Learn More
+- Translation files are in `public/locales/en/translation.json` and
+  `public/locales/fa/translation.json`.
+- The app detects the locale from the URL (e.g., `/en`, `/fa`).
+- To add more languages, add a new folder in `public/locales/` and update your i18n config if
+  needed.
 
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Scripts
+
+- `npm run dev` / `yarn dev` — Start the development server
+- `npm run build` / `yarn build` — Build for production
+- `npm run test` / `yarn test` — Run tests
+- `npm run format` — Format code with Prettier
+
+---
+
+## Notes
+
+- Make sure your API server is running if the app depends on backend endpoints.
+- If you add new translation files in `public/locales`, restart the dev server.
+
+---
+
+## License
+
+MIT
