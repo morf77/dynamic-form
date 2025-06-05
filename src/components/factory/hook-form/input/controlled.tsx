@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, RegisterOptions, useFormContext } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 import Input from '../../../ui/input';
 import SkeletonFetchingLoading from '../../../ui/loaders/skeleton';
+import { useNavigate } from 'react-router-dom';
 
 export type TControlledInputProps = RegisterOptions &
   Pick<
@@ -31,6 +32,7 @@ export type TControlledInputProps = RegisterOptions &
     isLoading?: boolean;
     isFetching?: boolean;
     skeletonClassName?: string;
+    connectedToURL?: boolean;
   };
 
 const ControlledInput: FC<TControlledInputProps> = props => {
@@ -55,6 +57,7 @@ const ControlledInput: FC<TControlledInputProps> = props => {
     skeletonClassName,
     className,
     suffix,
+    connectedToURL = true,
     classNameLabel,
     inputMode,
     classNameHelperText,
@@ -63,7 +66,39 @@ const ControlledInput: FC<TControlledInputProps> = props => {
 
   const [firstBlur, setFirstBlur] = useState<boolean>(false);
 
-  const { trigger, control, watch } = useFormContext();
+  const { trigger, control, watch, setValue } = useFormContext();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (connectedToURL) {
+      const params = new URLSearchParams(location.search);
+      const urlValue = params.get(name);
+      if (urlValue !== null) {
+        setValue(name, urlValue);
+      }
+    }
+    // eslint-disable-next-line
+  }, [name]);
+
+  useEffect(() => {
+    if (connectedToURL) {
+      const subscription = watch((values, { name: changedName }) => {
+        if (changedName === name) {
+          const params = new URLSearchParams(location.search);
+          const newValue = values[name];
+          if (newValue) {
+            params.set(name, newValue);
+          } else {
+            params.delete(name);
+          }
+          navigate({ search: params.toString() }, { replace: true });
+        }
+      });
+      return () => subscription.unsubscribe();
+    }
+    // eslint-disable-next-line
+  }, [name]);
 
   return (
     <SkeletonFetchingLoading

@@ -1,5 +1,5 @@
 .basic-group input:not(:placeholder-shown) + .label {
-  @apply absolute -top-[20%] scale-75 start-0;
+  @apply bg-gray-100 dark:bg-gray-900 absolute -top-[20%] scale-75 start-0;
 }
 
 .basic-group input:not(:placeholder-shown) + .label::before {
@@ -12,7 +12,9 @@
   @apply text-[3rem] leading-[0];
 }
 
-.basic-group input:focus + .label {
+/* second styling based on focus like MUI */
+
+/* .basic-group input:focus + .label {
   @apply absolute -top-[20%] scale-75 start-0;
 }
 
@@ -24,4 +26,4 @@
 .basic-group input:focus + .label::after {
   content: '.';
   @apply text-[3rem] leading-[0];
-}
+} */

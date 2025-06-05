@@ -322,10 +322,14 @@ html {
   );
 }
 
+.background {
+  @apply bg-gray-100 dark:bg-gray-900;
+}
+
 body {
   font-family: var(--font-sans);
   font-variant-numeric: var(--font-sans-num);
-  @apply bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-gray-50 transition-colors duration-300;
+  @apply background text-gray-900 dark:text-gray-50 transition-colors duration-300;
 }
 
 .font-sans {

@@ -48,7 +48,7 @@ const styleContainer = cva(
       }
     },
     defaultVariants: {
-      size: 'medium',
+      size: 'small',
       color: 'theme'
     }
   }
@@ -101,7 +101,7 @@ const styleInput = cva(
       }
     },
     defaultVariants: {
-      size: 'medium',
+      size: 'small',
       variation: 'basic',
       color: 'theme'
     }
@@ -124,9 +124,8 @@ const styleLabel = cva(
           // layout
           'top-[25%]',
           // animation
-          'label',
+          'label'
           // detailed
-          'background'
         ]
       },
       color: {
@@ -156,7 +155,7 @@ const styleLabel = cva(
       }
     },
     defaultVariants: {
-      size: 'medium',
+      size: 'small',
       variation: 'basic',
       color: 'theme'
     }
@@ -208,7 +207,7 @@ const stylePrefix = cva(
       }
     },
     defaultVariants: {
-      size: 'medium',
+      size: 'small',
       variation: 'basic',
       color: 'theme'
     }
@@ -260,7 +259,7 @@ const styleSuffix = cva(
       }
     },
     defaultVariants: {
-      size: 'medium',
+      size: 'small',
       variation: 'basic',
       color: 'theme'
     }
@@ -277,7 +276,7 @@ const styleHelperText = cva(
     '',
     // detailed
     'text-3xs',
-    'background',
+    'bg-gray-200 dark:bg-gray-900',
     'start-5'
   ],
   {
@@ -310,7 +309,7 @@ const styleHelperText = cva(
       }
     },
     defaultVariants: {
-      size: 'medium',
+      size: 'small',
       color: 'theme'
     }
   }

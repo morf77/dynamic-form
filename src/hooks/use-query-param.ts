@@ -1,7 +1,5 @@
 export default '';
 
-// 'use client';
-
 // import { pathnameCreator } from '@/helpers/url';
 // import { QUERY_PARAM } from '@/enums/query-param';
 // import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';

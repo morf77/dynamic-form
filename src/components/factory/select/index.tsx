@@ -91,7 +91,7 @@ const Select: FC<Components.factory.select> = props => {
               inputProps.prefix || (
                 <Icon
                   name={ICON_NAME.NAV}
-                  className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                  className={`transition-transform fill-transparent size-8 stroke-gray-500 duration-200 ${isOpen ? 'rotate-180' : ''}`}
                 />
               )
             )

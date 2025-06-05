@@ -1,16 +1,28 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+// In the slice section i normally follow backend structure.
+//  But in this case, we can keep it simple and have one slice for all insurance related data.
+
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { axiosBaseQuery } from '../../lib/axios/axios-base-query';
 
 export const insuranceSlice = createApi({
   reducerPath: 'insuranceSlice',
-  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+  baseQuery: axiosBaseQuery({ baseURL: '/api' }),
   endpoints: builder => ({
-    getBanksJson: builder.query<Array<Service.json.bank>, void>({
-      query: () => ({ url: 'jsons/bank.json', method: 'GET' })
+    getFormResults: builder.query<Service.results, void>({
+      query: () => ({ url: '/insurance/forms/submissions', method: 'GET' })
     }),
-    getLottieJson: builder.query<any, { animation: string }>({
-      query: ({ animation }) => ({ url: `lottie/${animation}.json`, method: 'GET' })
+    getForms: builder.query<Array<Service.forms>, void>({
+      query: () => ({ url: '/insurance/forms', method: 'GET' })
+    }),
+    postFormResult: builder.mutation<any, any>({
+      query: body => ({
+        url: `/insurance/forms/submit`,
+        method: 'POST',
+        body
+      })
     })
   })
 });
 
-export const { useGetBanksJsonQuery, useGetLottieJsonQuery } = insuranceSlice;
+export const { useGetFormResultsQuery, usePostFormResultMutation, useGetFormsQuery } =
+  insuranceSlice;

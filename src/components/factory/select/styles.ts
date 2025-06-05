@@ -1,7 +1,6 @@
 import { cva } from 'class-variance-authority';
 
 export const styleSelectContainer = cva([
-  // layout
   'border-gray-100',
   'border-l',
   'border-b',
@@ -17,7 +16,6 @@ export const styleSelectContainer = cva([
 
 export const styleSelectListItem = cva(
   [
-    // detailed
     'hover:bg-primary-50',
     'dark:hover:bg-gray-600',
     'cursor-pointer',

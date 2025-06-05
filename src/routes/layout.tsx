@@ -9,14 +9,14 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
 
   return (
     <div
-      className={`flex flex-col h-[100svh]  pt-[2vh] sm:px-[15%] lg:px-[20%] xl:px-[25%] 2xl:px-[30%] scroll`}
+      className={`flex flex-col h-[100svh] pt-[2vh] sm:px-[15%] lg:px-[20%] xl:px-[25%] 2xl:px-[30%]`}
     >
       <div className="mx-[6vw] flex justify-between border-b pb-3">
         <div className="flex gap-5 items-center">
-          <h1 className="text-lg text-primary-500">Insurance App</h1>
+          <h1 className="text-lg text-primary-500 dark:text-primary-200">Insurance App</h1>
 
           <a href={isResult ? '/' : '/result'}>
-            <Button color="gradientBase" size="xSmall">
+            <Button color="success" size="xSmall">
               {isResult ? 'Add New' : 'History'}
             </Button>
           </a>
@@ -24,6 +24,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
 
         {<UserSettingHandler />}
       </div>
+
       <div className="grow overflow-y-auto overflow-x-hidden scroll relative max-w-full">
         {/* for modals and other absolute loadings */}
         <div id="layout" />

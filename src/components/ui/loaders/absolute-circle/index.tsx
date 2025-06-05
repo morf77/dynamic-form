@@ -1,5 +1,3 @@
-'use client';
-
 import Portal from '../../../../providers/portal';
 import LoaderCircle from '../circle/circle';
 

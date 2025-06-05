@@ -1,5 +1,3 @@
-'use client';
-
 import { useImperativeHandle, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import dropdownBasic from './styles';

@@ -23,6 +23,7 @@ export const styleDropdown = cva(
     'duration-200',
     // detailed
     'overflow-hidden',
+    'bg-gray-200 dark:bg-gray-900',
     'z-10'
   ],
   {

@@ -1,9 +1,9 @@
 import { Controller, RegisterOptions, useFormContext } from 'react-hook-form';
-import Checkbox from '../../../ui/checkbox';
+import Radio from '../../../ui/radio';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ControlledCheckBox: FC<
+const ControlledRadio: FC<
   Pick<
     Components.ui.checkbox,
     'name' | 'color' | 'variation' | 'value' | 'checked' | 'size' | 'className'
@@ -12,10 +12,10 @@ const ControlledCheckBox: FC<
     Partial<Pick<Components.ui.checkbox, 'onChange'>> & {
       connectedToURL?: boolean;
     }
-> = ({ name, onChange, color, value, required, checked, connectedToURL = true, ...props }) => {
+> = ({ name, onChange, connectedToURL = true, color, value, required, checked, ...props }) => {
   const navigate = useNavigate();
 
-  const { control, watch, setValue, trigger } = useFormContext();
+  const { control, setValue, watch } = useFormContext();
 
   useEffect(() => {
     if (connectedToURL) {
@@ -52,26 +52,21 @@ const ControlledCheckBox: FC<
       defaultValue={checked ? value : ''}
       rules={{ required }}
       render={({ field, fieldState }) => {
-        let selectedItems = (field.value as string)?.toString()?.split(',');
+        let selectedValue = field.value as string;
 
-        if (selectedItems.length === 1 && !selectedItems[0].length) selectedItems = [];
+        const isSelected = value === selectedValue;
 
-        const isSelected = selectedItems.some(item => item.toString() === value.toString());
+        console.log(name, value, isSelected);
 
         return (
-          <Checkbox
+          <Radio
             {...props}
             name={field.name}
             checked={isSelected}
             onChange={() => {
-              isSelected
-                ? setValue(
-                    name,
-                    selectedItems.filter(item => item.toString() !== value.toString()).join(',')
-                  )
-                : setValue(name, selectedItems.concat([value]).join(','));
+              console.log(isSelected);
 
-              trigger(name);
+              isSelected ? null : setValue(name, value);
             }}
             value={value}
             color={fieldState.error ? 'danger' : color}
@@ -83,4 +78,4 @@ const ControlledCheckBox: FC<
   );
 };
 
-export default ControlledCheckBox;
+export default ControlledRadio;

@@ -1,3 +1,3 @@
 export const enum QUERY_PARAM {
-  tab = 'tab'
+  TAB = 'tab'
 }
