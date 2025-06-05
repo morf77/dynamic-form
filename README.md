@@ -4,6 +4,11 @@ Apologies for the delay in delivering the code. In this project, I tried to show
 understanding of frontend development. The focus is more on isolation processes and inheritance
 rather than just technology, along with a cohesive approach to typography.
 
+Unfortunately, I did not have enough time to implement Jest and drag-and-drop; most of the time was
+dedicated to demonstrating clean syntax and architectural patterns.
+
+- Enjoy from cashing every action of user ^\_^
+
 ## Features
 
 - Dynamic insurance forms with validation
