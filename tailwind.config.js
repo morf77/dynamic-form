@@ -1,41 +1,10 @@
-import type { Config } from 'tailwindcss';
-
-const defaultTheme = require('tailwindcss/defaultTheme');
-
-const config: Config = {
+const config = {
   darkMode: 'class',
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}'
-  ],
-  plugins: [
-    function ({ addUtilities }: any) {
-      addUtilities({
-        '.scrollbar-hide': {
-          /* IE and Edge */
-          '-ms-overflow-style': 'none',
-          /* Firefox */
-          'scrollbar-width': 'none',
-          /* Safari and Chrome */
-          '&::-webkit-scrollbar': {
-            display: 'none'
-          }
-        }
-      });
-    }
-  ],
+  unknown: 'ignore',
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './src/**/*.ts'],
+  plugins: [],
   theme: {
     extend: {
-      animation: {
-        'rotate45': 'rotate45 1s ease-in-out infinite alternate'
-      },
-      keyframes: {
-        rotate45: {
-          'from': { transform: 'rotate(-2deg)' },
-          'to': { transform: 'rotate(2deg)' }
-        }
-      },
       borderColor: {
         DEFAULT: 'var(--gray-400)'
       },
@@ -83,13 +52,7 @@ const config: Config = {
         '96': '13.7143rem' // 192px
       },
 
-      fontFamily: {
-        dana: ['var(--font-dana)'],
-        yekan: ['var(--font-yekan)'],
-        gilroy: ['var(--font-gilroy)']
-      },
       borderRadius: {
-        ...defaultTheme.borderRadius,
         '3xs': '1px',
         '2xs': '2px',
         'xs': '4px',
@@ -105,7 +68,6 @@ const config: Config = {
       },
       lineHeight: {},
       fontSize: {
-        ...defaultTheme.fontSize,
         '3xs': '0.7143rem', // 10px
         '2xs': '0.7857rem', // 11px
         'xs': '0.8571rem', // 12px
@@ -119,8 +81,6 @@ const config: Config = {
         '5xl': '1.7143rem' // 24px
       },
       colors: {
-        ...defaultTheme.colors,
-
         transparent: 'transparent',
         // all primary colors from UI
         primary: {

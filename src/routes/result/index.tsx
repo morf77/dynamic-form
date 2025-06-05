@@ -1,5 +1,5 @@
 const PageResult: FC = () => {
-  return <></>;
+  return <>test result</>;
 };
 
 export default PageResult;

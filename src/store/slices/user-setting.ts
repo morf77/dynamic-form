@@ -26,6 +26,8 @@ export const userSettingSlice = createSlice({
       localStorage.setItem('theme', action.payload);
       const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+      console.log(action.payload === 'dark' || (!action.payload && systemPreference));
+
       if (action.payload === 'dark' || (!action.payload && systemPreference)) {
         document.documentElement.classList.add('dark');
       } else {

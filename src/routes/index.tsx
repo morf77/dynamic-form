@@ -1,8 +1,7 @@
-import { useRoutes } from 'react-router-dom';
-import { routes } from './config';
-import Layout from './layout';
+import PageForm from './form';
+import PageResult from './result';
 
-export default function AppRoutes() {
-  const element = useRoutes(routes);
-  return <Layout>{element}</Layout>;
-}
+export const routes = [
+  { path: '/', element: <PageForm /> },
+  { path: '/result', element: <PageResult /> }
+];
