@@ -4,13 +4,30 @@ import { twMerge } from 'tailwind-merge';
 import Toggler from '../components/ui/toggler';
 import Icon, { ICON_NAME } from '../lib/icon';
 import { changeTheme } from '../store/slices/user-setting';
+import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const UserSettingHandler = () => {
+  const location = useLocation();
+
+  const locale = location.pathname.split('/')[1] || 'en';
+
+  const navigate = useNavigate();
+
+  const { i18n } = useTranslation();
+
   const { theme } = useSelector((state: RootState) => state.userSetting);
 
   const dispatch = useDispatch();
 
   // enabling service schema
+
+  useEffect(() => {
+    if (locale !== 'en' && locale !== 'fa') {
+      navigate('/en' + location.pathname + location.search, { replace: true });
+    }
+    // eslint-disable-next-line
+  }, [locale, location.pathname, location.search, navigate]);
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -19,16 +36,23 @@ const UserSettingHandler = () => {
       document.documentElement.classList.remove('dark');
     }
 
+    // if(window.location.href.includes("/en/"))
+
     import('../components/ui/loaders/circle/circle');
     import('../components/ui/loaders//spinner');
     import('../components/ui/loaders/absolute-circle');
   }, []);
 
+  const handleLocaleChange = () => {
+    const newLocale = locale === 'en' ? 'fa' : 'en';
+    const newPath = location.pathname.replace(/^\/(en|fa)/, `/${newLocale}`);
+    console.log('working', locale, newLocale, newPath);
+    navigate(newPath + location.search);
+    i18n.changeLanguage(newLocale);
+  };
+
   return (
-    <button
-      className={twMerge('flex justify-between items-center gap-5')}
-      onClick={() => dispatch(changeTheme(theme === 'dark' ? 'light' : 'dark'))}
-    >
+    <div className={twMerge('flex justify-between items-center gap-5')}>
       <div className="flex gap-4 items-center justify-between">
         {theme === 'dark' ? (
           <Icon name={ICON_NAME.MOON} className="size-12 fill-gray-100" />
@@ -42,10 +66,17 @@ const UserSettingHandler = () => {
 
       <Toggler
         isChecked={theme === 'dark'}
-        onChange={() => {}}
+        onChange={() => dispatch(changeTheme(theme === 'dark' ? 'light' : 'dark'))}
+      />
+
+      <div className="flex gap-4 items-center justify-between">{locale === 'en' ? 'En' : 'Fa'}</div>
+
+      <Toggler
+        isChecked={locale === 'fa'}
+        onChange={handleLocaleChange}
         // onChange={() => dispatch(changeTheme(theme === 'dark' ? 'light' : 'dark'))}
       />
-    </button>
+    </div>
   );
 };
 

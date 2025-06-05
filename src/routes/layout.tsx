@@ -1,8 +1,11 @@
 import { useLocation } from 'react-router-dom';
 import Button from '../components/ui/button';
 import UserSettingHandler from '../providers/user-setting-handler';
+import { useTranslation } from 'react-i18next';
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
+  const { t } = useTranslation();
+
   const location = useLocation();
 
   const isResult = location.pathname.includes('/result');
@@ -13,11 +16,11 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
     >
       <div className="mx-[6vw] flex justify-between border-b pb-3">
         <div className="flex gap-5 items-center">
-          <h1 className="text-lg text-primary-500 dark:text-primary-200">Insurance App</h1>
+          <h1 className="text-lg text-primary-500 dark:text-primary-200"> {t('insuranceApp')}</h1>
 
           <a href={isResult ? '/' : '/result'}>
             <Button color="success" size="xSmall">
-              {isResult ? 'Add New' : 'History'}
+              {isResult ? t('addNew') : t('history')}
             </Button>
           </a>
         </div>

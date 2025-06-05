@@ -11,12 +11,12 @@ import { FIELDS_TYPE } from '../../enums/services';
 import SkeletonFetchingLoading from '../../components/ui/loaders/skeleton';
 import Button from '../../components/ui/button';
 import { objectCleaner } from '../../helpers/object';
-import useAppTranslation from '../../lib/i18n';
+import { useTranslation } from 'react-i18next';
 
 type NestedArray = Array<string | NestedArray>;
 
 const PageForm: FC = () => {
-  const translate = useAppTranslation('translate');
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -78,7 +78,7 @@ const PageForm: FC = () => {
           </SkeletonFetchingLoading>
         ))}
 
-        <ControlledButtonSubmit isLoading={isLoading}>Submit</ControlledButtonSubmit>
+        <ControlledButtonSubmit isLoading={isLoading}>{t('submit')}</ControlledButtonSubmit>
       </>
     ),
     name: item.title,

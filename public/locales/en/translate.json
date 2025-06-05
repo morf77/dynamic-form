@@ -1,4 +1,7 @@
 {
   "submit": "Submit",
-  "reset": "Reset"
+  "reset": "Reset",
+  "insuranceApp": "Insurance App",
+  "history": "History",
+  "addNew": "Add New"
 }
