@@ -2,7 +2,6 @@ import Portal from '../../../../providers/portal';
 import LoaderCircle from '../circle/circle';
 
 const LoadingCircleAbsolute: FC = () => {
-  console.log('loader is on');
   return (
     <Portal
       target="layout"

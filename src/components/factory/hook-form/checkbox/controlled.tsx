@@ -36,8 +36,6 @@ const ControlledCheckBox: FC<
       render={({ field, fieldState }) => {
         let selectedItems = (field.value as string)?.toString()?.split(',');
 
-        console.log(selectedItems);
-
         if (selectedItems.length === 1 && !selectedItems[0].length) selectedItems = [];
 
         const isSelected = selectedItems.some(item => item.toString() === value.toString());
@@ -51,8 +49,6 @@ const ControlledCheckBox: FC<
               const params = new URLSearchParams(location.search);
 
               const currentValue = params.get(name);
-
-              console.log(currentValue);
 
               if (isSelected) {
                 const filteredValue = selectedItems
