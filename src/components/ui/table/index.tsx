@@ -12,7 +12,7 @@ const Table: React.FC<Components.ui.table> = ({ columns, data }) => {
     dragCol.current = col;
   };
 
-  const handleDragOver = (e: React.DragEvent<HTMLTableHeaderCellElement>) => {
+  const handleDragOver = (e: React.DragEvent) => {
     console.log('drag end');
     e.preventDefault();
   };
@@ -45,7 +45,10 @@ const Table: React.FC<Components.ui.table> = ({ columns, data }) => {
                   <th
                     key={col}
                     draggable
-                    onDragStart={() => handleDragStart(col)}
+                    onDragStart={() => {
+                      handleDragStart(col);
+                    }}
+                    onClick={() => console.log('clicked')}
                     onDragOver={handleDragOver}
                     onDrop={() => handleDrop(col)}
                     className="px-4 py-2 border-b bg-gray-100 dark:bg-gray-700 text-left text-sm font-semibold cursor-move select-none"
@@ -60,7 +63,17 @@ const Table: React.FC<Components.ui.table> = ({ columns, data }) => {
               {data.map(row => (
                 <tr key={row.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
                   {colOrder.map(col => (
-                    <td key={col} className="px-4 py-2 border-t text-sm">
+                    <td
+                      draggable
+                      onDragStart={() => {
+                        handleDragStart(col);
+                      }}
+                      onClick={() => console.log('clicked')}
+                      onDragOver={handleDragOver}
+                      onDrop={() => handleDrop(col)}
+                      key={col}
+                      className="px-4 py-2 border-t text-sm"
+                    >
                       {row[col]}
                     </td>
                   ))}
