@@ -6,7 +6,15 @@ declare namespace Components.ui {
       type?: 'submit' | 'reset' | 'button' | undefined;
       // from styles file
       variation?: 'basic' | 'noStyle' | 'outline';
-      color?: 'gradientBase' | 'info' | 'success' | 'warning' | 'danger' | 'theme' | 'transparent';
+      color?:
+        | 'gradientBase'
+        | 'gradientDanger'
+        | 'info'
+        | 'success'
+        | 'warning'
+        | 'danger'
+        | 'theme'
+        | 'transparent';
       size?: 'xxSmall' | 'xSmall' | 'small' | 'medium' | 'large';
       onClick?: (e?: any) => void;
     };

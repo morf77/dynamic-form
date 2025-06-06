@@ -59,7 +59,7 @@ const PageForm: FC = () => {
           isFetching={isFetching}
         >
           <div className="flex items-center justify-between gap-5">
-            <Button size="medium" color="danger" onClick={() => methods.reset()}>
+            <Button size="medium" color="gradientDanger" onClick={() => methods.reset()}>
               {t('reset')}
             </Button>
             <Badge size="medium" className="w-full" color="info">

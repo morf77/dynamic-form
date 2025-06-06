@@ -24,6 +24,16 @@ const styleButton = cva(
           // active
           'active:bg-gradient-base-600'
         ],
+        gradientDanger: [
+          // light
+          'bg-gradient-danger',
+          'border-2',
+          'border-danger-500',
+          'text-white',
+          'dark:text-white',
+          // dark
+          ''
+        ],
         info: [
           // light (apply on all colors but it will override by next modes)
           'bg-info-500 text-white',
@@ -141,6 +151,12 @@ const styleButtonActive = cva('pointer-event-none', {
         // dark
         ''
       ],
+      gradientDanger: [
+        // light
+        'outline outline-success-100',
+        // dark
+        ''
+      ],
       transparent: [
         // light
         '',
@@ -176,6 +192,12 @@ const styleButtonLoading = cva('absolute stroke-white', {
         ''
       ],
       info: [
+        // light
+        '',
+        // dark
+        ''
+      ],
+      gradientDanger: [
         // light
         '',
         // dark

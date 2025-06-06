@@ -19,12 +19,12 @@ const TogglerMultiple: FC<{
             `py-6 transition-all font-semibold duration-200 border-secondary-500 text-center ${item.value === active ? 'text-gray-50 bg-gradient-base-500' : 'text-secondary-600'} ${item?.disabled ? 'opacity-50 pointer-events-none' : ''} ${
               // first
               index === 0
-                ? 'rounded-s-lg border-b border-l'
+                ? 'border-x border-b rounded-s-lg'
                 : // last
                   index === length - 1
-                  ? 'border border-t-0 rounded-e-lg'
+                  ? 'border-x border-b rounded-e-lg'
                   : // middles
-                    'border-b border-s'
+                    'border-b '
             }`,
             className
           )}

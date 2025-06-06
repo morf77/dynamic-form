@@ -4,7 +4,7 @@ import Link from '../components/ui/button/link';
 import UserSettingHandler from '../providers/user-setting-handler';
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const location = useLocation();
 
@@ -21,7 +21,11 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
         <div className="flex gap-5 items-center">
           <h1 className="text-lg text-primary-500 dark:text-primary-200"> {t('insuranceApp')}</h1>
 
-          <Link color="success" size="xSmall" to={isResult ? '/' : '/result'}>
+          <Link
+            color="gradientBase"
+            size="xSmall"
+            to={isResult ? `/${i18n.language}` : `/${i18n.language}/result`}
+          >
             {isResult ? t('addNew') : t('history')}
           </Link>
         </div>

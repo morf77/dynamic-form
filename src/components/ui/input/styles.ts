@@ -12,7 +12,7 @@ const styleContainer = cva(
     // detailed
     'basic-group',
     // animation
-    'rounded-md'
+    'rounded-sm'
   ],
   {
     variants: {
