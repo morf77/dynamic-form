@@ -1,28 +1,29 @@
-import { useLocation } from 'react-router-dom';
-import Button from '../components/ui/button';
-import UserSettingHandler from '../providers/user-setting-handler';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
+import Link from '../components/ui/button/link';
+import UserSettingHandler from '../providers/user-setting-handler';
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   const { t } = useTranslation();
 
   const location = useLocation();
 
+  const locale = location.pathname.split('/')[1] || 'en';
+
   const isResult = location.pathname.includes('/result');
 
   return (
     <div
       className={`flex flex-col h-[100svh] pt-[2vh] sm:px-[15%] lg:px-[20%] xl:px-[25%] 2xl:px-[30%]`}
+      dir={locale === 'en' ? 'lrt' : 'rtl'}
     >
       <div className="mx-[6vw] flex justify-between border-b pb-3">
         <div className="flex gap-5 items-center">
           <h1 className="text-lg text-primary-500 dark:text-primary-200"> {t('insuranceApp')}</h1>
 
-          <a href={isResult ? '/' : '/result'}>
-            <Button color="success" size="xSmall">
-              {isResult ? t('addNew') : t('history')}
-            </Button>
-          </a>
+          <Link color="success" size="xSmall" to={isResult ? '/' : '/result'}>
+            {isResult ? t('addNew') : t('history')}
+          </Link>
         </div>
 
         {<UserSettingHandler />}

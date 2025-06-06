@@ -60,7 +60,7 @@ const PageForm: FC = () => {
         >
           <div className="flex items-center justify-between gap-5">
             <Button size="medium" color="danger" onClick={() => methods.reset()}>
-              Reset
+              {t('reset')}
             </Button>
             <Badge size="medium" className="w-full" color="info">
               {item.title}

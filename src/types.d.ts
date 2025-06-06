@@ -34,6 +34,8 @@ type HTMLSectionProps = HTMLAttributes<HTMLElement>;
 
 type HTMLButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
+type HTMLAnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
+
 type HTMLInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 type HTMLTextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;

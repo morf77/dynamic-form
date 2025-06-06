@@ -2,11 +2,12 @@ import { twMerge } from 'tailwind-merge';
 import AnimatedSpinner from '../loaders/spinner';
 import buttonBasic from './styles';
 
-const Button: FC<Components.ui.button> = ({
+import { Link as RouterLink } from 'react-router-dom';
+
+const Link: FC<Components.ui.link> = ({
   className,
   contentClassName,
   isLoading,
-  type = 'button',
   variation = 'basic',
   size = 'medium',
   color,
@@ -15,9 +16,6 @@ const Button: FC<Components.ui.button> = ({
   isActive,
   ...props
 }) => {
-  // using variation with below approach to separate variations completely
-
-  // generic of variation schema
   const styles = twMerge(
     twMerge(
       buttonBasic.styleButton({ size, color, disabled, isLoading }),
@@ -27,9 +25,8 @@ const Button: FC<Components.ui.button> = ({
   );
 
   const stylesLoading = buttonBasic.styleButtonLoading({ color });
-
   return (
-    <button type={type} className={styles} {...props}>
+    <RouterLink {...props} className={styles}>
       <div
         className={`flex items-center justify-center h-full w-full ${twMerge(isLoading ? 'opacity-0' : '', contentClassName)}`}
       >
@@ -37,8 +34,8 @@ const Button: FC<Components.ui.button> = ({
       </div>
 
       {isLoading && <AnimatedSpinner className={stylesLoading} />}
-    </button>
+    </RouterLink>
   );
 };
 
-export default Button;
+export default Link;

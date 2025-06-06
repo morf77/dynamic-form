@@ -20,13 +20,10 @@ const UserSettingHandler = () => {
 
   const dispatch = useDispatch();
 
-  // enabling service schema
-
   useEffect(() => {
     if (locale !== 'en' && locale !== 'fa') {
       navigate('/en' + location.pathname + location.search, { replace: true });
     }
-    // eslint-disable-next-line
   }, [locale, location.pathname, location.search, navigate]);
 
   useEffect(() => {
@@ -36,12 +33,14 @@ const UserSettingHandler = () => {
       document.documentElement.classList.remove('dark');
     }
 
-    // if(window.location.href.includes("/en/"))
-
     import('../components/ui/loaders/circle/circle');
     import('../components/ui/loaders//spinner');
     import('../components/ui/loaders/absolute-circle');
   }, []);
+
+  useEffect(() => {
+    i18n.language !== locale && i18n.changeLanguage(locale);
+  }, [locale]);
 
   const handleLocaleChange = () => {
     const newLocale = locale === 'en' ? 'fa' : 'en';

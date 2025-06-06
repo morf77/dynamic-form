@@ -10,4 +10,6 @@ declare namespace Components.ui {
       size?: 'xxSmall' | 'xSmall' | 'small' | 'medium' | 'large';
       onClick?: (e?: any) => void;
     };
+
+  type link = Omit<button, 'type'> & import('react-router-dom').LinkProps;
 }
