@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Controller, RegisterOptions, useFormContext } from 'react-hook-form';
+import { Controller, RegisterOptions, useFormContext, useWatch } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 import Input from '../../../ui/input';
 import SkeletonFetchingLoading from '../../../ui/loaders/skeleton';
@@ -68,6 +68,8 @@ const ControlledInput: FC<TControlledInputProps> = props => {
 
   const { trigger, control, watch, setValue } = useFormContext();
 
+  const fieldValue = useWatch({ name });
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -95,7 +97,9 @@ const ControlledInput: FC<TControlledInputProps> = props => {
           navigate({ search: params.toString() }, { replace: true });
         }
       });
-      return () => subscription.unsubscribe();
+      return () => {
+        subscription.unsubscribe();
+      };
     }
     // eslint-disable-next-line
   }, [name]);
@@ -138,6 +142,7 @@ const ControlledInput: FC<TControlledInputProps> = props => {
               dirContainer={dirContainer}
               suffix={suffix}
               {...field}
+              value={fieldValue || ''}
               classNameHelperText={classNameHelperText}
               className={className}
               inputMode={inputMode}

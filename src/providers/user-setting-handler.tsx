@@ -46,7 +46,7 @@ const UserSettingHandler = () => {
   const handleLocaleChange = () => {
     const newLocale = locale === 'en' ? 'fa' : 'en';
     const newPath = location.pathname.replace(/^\/(en|fa)/, `/${newLocale}`);
-    console.log('working', locale, newLocale, newPath);
+
     navigate(newPath + location.search);
     i18n.changeLanguage(newLocale);
   };

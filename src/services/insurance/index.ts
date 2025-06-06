@@ -18,8 +18,6 @@ export const insuranceSlice = createApi({
     }),
     postFormResult: builder.mutation<any, any>({
       query: body => {
-        console.log('before post', body);
-
         return {
           url: `/insurance/forms/submit`,
           method: 'POST',

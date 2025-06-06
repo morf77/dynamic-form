@@ -1,4 +1,4 @@
-import { Controller, RegisterOptions, useFormContext } from 'react-hook-form';
+import { Controller, RegisterOptions, useFormContext, useWatch } from 'react-hook-form';
 import Radio from '../../../ui/radio';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,8 @@ const ControlledRadio: FC<
 
   const { control, setValue, watch } = useFormContext();
 
+  const fieldValue = useWatch({ name });
+
   useEffect(() => {
     if (connectedToURL) {
       const params = new URLSearchParams(location.search);
@@ -31,7 +33,7 @@ const ControlledRadio: FC<
     if (connectedToURL) {
       const subscription = watch((values, { name: changedName }) => {
         const newValue = values[name];
-        if (changedName === name && newValue === value) {
+        if (changedName === name && (newValue === value || !newValue)) {
           const params = new URLSearchParams(location.search);
           if (newValue) {
             newValue !== params.get(name) && params.set(name, newValue);
@@ -41,7 +43,9 @@ const ControlledRadio: FC<
           navigate({ search: params.toString() }, { replace: true });
         }
       });
-      return () => subscription.unsubscribe();
+      return () => {
+        subscription.unsubscribe();
+      };
     }
   }, [name]);
 
@@ -52,9 +56,7 @@ const ControlledRadio: FC<
       defaultValue={checked ? value : ''}
       rules={{ required }}
       render={({ field, fieldState }) => {
-        let selectedValue = field.value as string;
-
-        const isSelected = value === selectedValue;
+        const isSelected = value === fieldValue;
 
         return (
           <Radio
