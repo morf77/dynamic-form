@@ -62,7 +62,7 @@ const PageForm: FC = () => {
             <Button size="medium" color="gradientDanger" onClick={() => methods.reset()}>
               {t('reset')}
             </Button>
-            <Badge size="medium" className="w-full" color="info">
+            <Badge size="medium" className="w-full" color="gradientBase">
               {item.title}
             </Badge>
           </div>
@@ -73,6 +73,7 @@ const PageForm: FC = () => {
             className="rounded-lg"
             isLoading={isLoadingForms}
             isFetching={isFetching}
+            key={field.id}
           >
             <InputController key={field.id} {...field} />
           </SkeletonFetchingLoading>

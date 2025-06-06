@@ -15,33 +15,15 @@ const ControlledCheckBox: FC<
 > = ({ name, onChange, color, value, required, checked, connectedToURL = true, ...props }) => {
   const navigate = useNavigate();
 
-  const { control, watch, setValue, trigger } = useFormContext();
+  const { control, setValue, trigger } = useFormContext();
 
   useEffect(() => {
     if (connectedToURL) {
       const params = new URLSearchParams(location.search);
       const urlValue = params.get(name);
-      if (urlValue && urlValue === value) {
+      if (urlValue?.length) {
         setValue(name, urlValue);
       }
-    }
-  }, [name]);
-
-  useEffect(() => {
-    if (connectedToURL) {
-      const subscription = watch((values, { name: changedName }) => {
-        const newValue = values[name];
-        if (changedName === name && newValue === value) {
-          const params = new URLSearchParams(location.search);
-          if (newValue) {
-            newValue !== params.get(name) && params.set(name, newValue);
-          } else {
-            params.delete(name);
-          }
-          navigate({ search: params.toString() }, { replace: true });
-        }
-      });
-      return () => subscription.unsubscribe();
     }
   }, [name]);
 
@@ -54,6 +36,8 @@ const ControlledCheckBox: FC<
       render={({ field, fieldState }) => {
         let selectedItems = (field.value as string)?.toString()?.split(',');
 
+        console.log(selectedItems);
+
         if (selectedItems.length === 1 && !selectedItems[0].length) selectedItems = [];
 
         const isSelected = selectedItems.some(item => item.toString() === value.toString());
@@ -64,18 +48,31 @@ const ControlledCheckBox: FC<
             name={field.name}
             checked={isSelected}
             onChange={() => {
-              isSelected
-                ? setValue(
-                    name,
-                    selectedItems.filter(item => item.toString() !== value.toString()).join(',')
-                  )
-                : setValue(name, selectedItems.concat([value]).join(','));
+              const params = new URLSearchParams(location.search);
 
+              const currentValue = params.get(name);
+
+              console.log(currentValue);
+
+              if (isSelected) {
+                const filteredValue = selectedItems
+                  .filter(item => item.toString() !== value.toString())
+                  .join(',');
+
+                setValue(name, filteredValue);
+                filteredValue.length ? params.set(name, filteredValue) : params.delete(name);
+              } else {
+                const addedValue = selectedItems.concat([value]).join(',');
+
+                setValue(name, addedValue);
+                params.set(name, addedValue);
+              }
+
+              navigate({ search: params.toString() }, { replace: true });
               trigger(name);
             }}
             value={value}
             color={fieldState.error ? 'danger' : color}
-            // ref={field.ref}
           />
         );
       }}

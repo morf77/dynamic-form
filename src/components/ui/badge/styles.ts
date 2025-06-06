@@ -17,6 +17,13 @@ const styleBadge = cva(
         large: ['py-5', 'px-8']
       },
       color: {
+        gradientBase: [
+          // light (apply on all colors but it will override by next modes)
+          'bg-gradient-base-300 text-white dark:text-white shadow-lg',
+          // dark
+          ''
+          // hover
+        ],
         info: [
           // light
           'bg-info-100',
