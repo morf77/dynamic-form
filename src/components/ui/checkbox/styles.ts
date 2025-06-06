@@ -8,7 +8,7 @@ export const styleCheckboxContainer = cva(
     'checkbox',
     'select-none',
     'cursor-pointer',
-    'rounded-md'
+    'rounded-sm'
   ],
   {
     variants: {
